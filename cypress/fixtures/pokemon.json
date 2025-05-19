@@ -1,0 +1,44 @@
+[
+  {
+    "name": "pikachu",
+    "id": 25,
+    "spritesCount": 10,
+    "baseExperience": 112,
+    "type": "electric"
+  },
+  {
+    "name": "squirtle",
+    "id": 7,
+    "spritesCount": 10,
+    "baseExperience": 63,
+    "type": "water"
+  },
+  {
+    "name": "bulbasaur",
+    "id": 1,
+    "spritesCount": 10,
+    "baseExperience": 64,
+    "type": "grass"
+  },
+  {
+    "name": "eevee",
+    "id": 133,
+    "spritesCount": 10,
+    "baseExperience": 65,
+    "type": "normal"
+  },
+  {
+    "name": "jigglypuff",
+    "id": 39,
+    "spritesCount": 10,
+    "baseExperience": 95,
+    "type": "normal"
+  },
+  {
+    "name": "snorlax",
+    "id": 143,
+    "spritesCount": 10,
+    "baseExperience": 189,
+    "type": "normal"
+  }
+]

@@ -59,17 +59,14 @@ describe("Todos exercise", () => {
         cy.get('.todo-count').invoke('text').then((text) => {
             expect(text.trim()).equal(count)
         });
-        cy.wait(2222222)
 
         // 5. Mark the first item as completed.
         // 6. Verify that the "Items" counter shows the correct number of remaining items.  
-
     })
 
 
     it('clicking "type" navigates to a new url', () => {
         cy.visit('https://example.cypress.io')
-
         cy.contains('type').click()
 
         // Should be on a new URL which
