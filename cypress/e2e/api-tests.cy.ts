@@ -10,10 +10,10 @@ interface PokemonApiResponse {
   species: { name: string }
   forms: { name: string, url: string }[]
   id: number
-  sprites: Record<string, any>
+  sprites: Record<string, unknown>
   base_experience: number
   types: { type: { name: string } }[]
-  abilities: any[]
+  abilities: unknown[]
   height: number
   stats: any[]
   moves: any[]
@@ -55,17 +55,17 @@ describe('Data Driven Test for an API using Cypress', () => {
           expect(body.height, 'Height should be a number greater than 0\n').to.be.a('number')
             .and.greaterThan(0);
           expect(body.stats, 'Stats should be an array and not empty').to.be.an('array')
-            .and.not.be.empty;
+            .and.not.be.empty
           expect(body.moves, 'Moves should be an array and not empty').to.be.an('array')
-            .and.not.be.empty;
+            .and.not.be.empty
           expect(body.types, 'Types should be an array and not empty').to.be.an('array')
-            .and.not.be.empty;
+            .and.not.be.empty
           expect(body.sprites, 'Sprites should have a front_default property that is a non-empty string')
-            .to.have.property('front_default').that.is.a('string').and.not.empty;
+            .to.have.property('front_default').that.is.a('string').and.not.empty
           expect(body.weight, 'Weight should be a number greater than 0').to.be.a('number')
-            .and.greaterThan(0);
+            .and.greaterThan(0)
           expect(body.stats[0], 'First stat should have a base_stat property that is a number greater than 0')
-            .to.have.property('base_stat').that.is.a('number').and.greaterThan(0);
+            .to.have.property('base_stat').that.is.a('number').and.greaterThan(0)
 
         })
 

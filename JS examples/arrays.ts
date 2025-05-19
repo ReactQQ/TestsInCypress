@@ -11,7 +11,7 @@ export {}
 function reverseString (initStr: string) {
   // TODO
   const spiltedBySpace = initStr.split(' ')
-  let reversed: string[] = []
+  const reversed: string[] = []
   spiltedBySpace.forEach(spilited =>{
       reversed.push(spilited.split('')
       .reverse().join(''))

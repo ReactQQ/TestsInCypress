@@ -10,7 +10,7 @@ Examples
 function reverseString(initStr: string) {
   // TODO
   // const spiltedBySpace = initStr.split(' ')
-  let reversed: string[] = []
+  const reversed: string[] = []
   initStr.split(' ')
     .forEach(spilited => {
       reversed.push(spilited
