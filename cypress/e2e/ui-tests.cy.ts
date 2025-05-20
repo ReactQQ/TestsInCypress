@@ -24,8 +24,6 @@ Test 2:
 6. Verify that the "Items" counter shows the correct number of remaining items.  
 */
 
-import axios = require('axios');
-
 describe("Todos exercise", () => {
     beforeEach(() => {
         cy.visit('https://example.cypress.io/todo')

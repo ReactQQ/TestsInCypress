@@ -3,12 +3,13 @@
     "target": "es5",
     "lib": ["es5", "dom"],
     "sourceMap": true,
-    "types": ["cypress", "node"]
+    "types": ["cypress", "node"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["**/*.ts"],
   "module": "commonjs",
   "moduleResolution": "node",
-  "preserveValueImports": false,
-  "resolveJsonModule": true,
-  "esModuleInterop": true
+  "preserveValueImports": false
 }

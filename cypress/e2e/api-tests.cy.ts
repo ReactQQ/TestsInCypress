@@ -1,3 +1,5 @@
+import pokemonData from '../fixtures/pokemon.json';
+
 type PokemonData = {
   name: string
   id: number
@@ -21,65 +23,61 @@ interface PokemonApiResponse {
 }
 
 describe('Data Driven Test for an API using Cypress', () => {
-  const pokemonData: PokemonData[] = require('../fixtures/pokemon.json')
-
-  pokemonData.forEach((pokemonJSON) => {
-
-    it(`Should validate "${pokemonJSON.name}" Pokemon details from PokeAPI based on JSON data`, () => {
-
-      cy.request(`https://pokeapi.co/api/v2/pokemon/${pokemonJSON.name}`)
+  const pokemonDataJson: PokemonData[] = pokemonData;
+  pokemonDataJson.forEach((pokemon) => {
+    it(`Should validate "${pokemon.name}" Pokemon details from PokeAPI based on JSON data`, () => {
+      cy.request(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
         .then((response: Cypress.Response<PokemonApiResponse>) => {
 
-          expect(response.status, `API request for ${pokemonJSON.name} should return a 200 status`)
+          expect(response.status, `API request for ${pokemon.name} should return a 200 status`)
             .to.eq(200);
 
           const body: Record<string, any> = response.body
-          expect(body.species.name, `Name check - spicies.name should be ${pokemonJSON.name}`)
-            .to.eq(pokemonJSON.name)
-          expect(body.forms[0].name, `Name check -forms.name should be ${pokemonJSON.name}`)
-            .to.eq(pokemonJSON.name)
+          expect(body.species.name, `Name check - spicies.name should be ${pokemon.name}`)
+            .to.eq(pokemon.name)
+          expect(body.forms[0].name, `Name check -forms.name should be ${pokemon.name}`)
+            .to.eq(pokemon.name)
           expect(body.id, 'Pokemon id should match')
-            .to.eq(pokemonJSON.id)
-          expect(Object.keys(body.sprites).length, `Length of sprites object should equal to ${pokemonJSON.spritesCount}`)
-            .to.eq(pokemonJSON.spritesCount)
+            .to.eq(pokemon.id)
+          expect(Object.keys(body.sprites).length, `Length of sprites object should equal to ${pokemon.spritesCount}`)
+            .to.eq(pokemon.spritesCount)
           expect(body.base_experience, 'Verifing base experience property value')
-            .to.eq(pokemonJSON.baseExperience)
+            .to.eq(pokemon.baseExperience)
           expect(body.types[0].type.name, 'Checking the type of pokemon')
-            .to.eq(pokemonJSON.type)
+            .to.eq(pokemon.type)
 
           // AI created
           expect(body.abilities, 'Abilities should be an array and not empty')
-            .to.be.an('array').and.not.be.empty;
-          expect(body.base_experience, 'Base experience should be a number greater than 0\n')
+            .to.be.an('array').to.have.lengthOf.above(0)
+          expect(body.base_experience, 'Base experience should be a number greater than 0')
             .to.be.a('number').and.greaterThan(0);
-          expect(body.height, 'Height should be a number greater than 0\n').to.be.a('number')
-            .and.greaterThan(0);
-          expect(body.stats, 'Stats should be an array and not empty').to.be.an('array')
-            .and.not.be.empty
-          expect(body.moves, 'Moves should be an array and not empty').to.be.an('array')
-            .and.not.be.empty
-          expect(body.types, 'Types should be an array and not empty').to.be.an('array')
-            .and.not.be.empty
+          expect(body.height, 'Height should be a number greater than 0')
+            .to.be.a('number').and.greaterThan(0);
+          expect(body.stats, 'Stats should be an array and not empty')
+            .to.be.an('array').and.to.have.lengthOf.above(0)
+          expect(body.moves, 'Moves should be an array and not empty')
+            .to.be.an('array').and.to.have.lengthOf.above(0)
+          expect(body.types, 'Types should be an array and not empty')
+            .to.be.an('array').and.to.have.lengthOf.above(0)
           expect(body.sprites, 'Sprites should have a front_default property that is a non-empty string')
-            .to.have.property('front_default').that.is.a('string').and.not.empty
-          expect(body.weight, 'Weight should be a number greater than 0').to.be.a('number')
-            .and.greaterThan(0)
+            .to.have.property('front_default').that.is.a('string').and.to.have.lengthOf.above(0)
+          expect(body.weight, 'Weight should be a number greater than 0')
+            .to.be.a('number').and.greaterThan(0)
           expect(body.stats[0], 'First stat should have a base_stat property that is a number greater than 0')
             .to.have.property('base_stat').that.is.a('number').and.greaterThan(0)
-
         })
 
     })
 
 
-    it(`Should retrieve and validate "${pokemonJSON.name}" Pokemon details from GET requesat data`, () => {
+    it(`Should retrieve and validate "${pokemon.name}" Pokemon details from GET request data`, () => {
 
-      cy.request(`https://pokeapi.co/api/v2/pokemon/${pokemonJSON.name}`)
+      cy.request(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
         .then((response: Cypress.Response<PokemonApiResponse>) => {
           cy.request(`${response.body.forms[0].url}`)
             .then((secondResponse) => {
-              expect(secondResponse.body.name).is.eq(pokemonJSON.name)
-              expect(secondResponse.body.id).is.eq(pokemonJSON.id)
+              expect(secondResponse.body.name).is.eq(pokemon.name)
+              expect(secondResponse.body.id).is.eq(pokemon.id)
             })
         })
 
